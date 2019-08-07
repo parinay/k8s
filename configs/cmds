@@ -1,0 +1,45 @@
+#create a namespace
+kubectl create ns configs
+
+#creating secrets e.g. API_KEY
+kubectl create secret generic apikey --from-literal=API_KEY=123–456 -n configs
+
+#creating configuiration maps e.g. language
+kubectl create configmap language --from-literal=LANGUAGE=English -n configs
+
+#Get existing secrets
+kubectl get secrets -n configs
+#Get existing configmaps
+kubectl get configmaps -n configs
+
+#List resource e.g. deployments in default name space
+kubectl get deploy
+
+#list resources e.g. deployments in particualr namespace
+kubectl get deploy -n configs
+
+#list resources e.g. pods in particualr namespace
+kubectl get pods -n configs
+
+#delete secrets and configmaps
+kubectl delete configmaps language -n configs
+kubectl delete secret apikey -n configs
+# applu creates a iresource e.g. deployment
+kubectl apply -f final.yaml -n configs
+
+#edit an api resource in a particular namespace
+kubectl edit deploy envtest -n configs
+
+#update values
+kubectl create configmap language --from-literal=LANGUAGE=Spanish -o yaml --dry-run | kubectl replace -f -
+kubectl create configmap language --from-literal=LANGUAGE=Spanish -o yaml --dry-run -n configs | kubectl replace -f -
+
+kubectl edit deploy envtest -n configs
+kubectl edit configmap -n configs
+kubectl edit secrets -n configs
+
+kubectl create secret apikey --from-literal=API_KEY=009876 -o yaml --dry-run -n configs | kubectl replace -f -
+kubectl create secret generic apikey --from-literal=API_KEY=009876 -o yaml --dry-run -n configs | kubectl replace -f -
+
+#delete pod ( for above change to come in effect)
+kubectl delete pod -l name=envtest
