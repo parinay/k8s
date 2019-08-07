@@ -43,3 +43,6 @@ kubectl create secret generic apikey --from-literal=API_KEY=009876 -o yaml --dry
 
 #delete pod ( for above change to come in effect)
 kubectl delete pod -l name=envtest
+
+#Describe configmaps
+kubectl describe configmaps language -n configs
