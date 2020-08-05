@@ -2,6 +2,11 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: kuard
+  labels:
+    env: prod
+    app: kuard
+  annotations:
+    imageregistry: "https://hub.docker.com/"
 spec:
   volumes:
     - name: "kuard-data"
